@@ -3,7 +3,7 @@ from redditcr.celery import app
 import praw
 from django.conf import settings
 
-reddit = praw.Reddit(client_id=settings.CLENT_ID,
+reddit = praw.Reddit(client_id=settings.CLIENT_ID,
                      client_secret=settings.CLIENT_SECRET,
                      password=settings.PASSWORD,
                      user_agent=settings.USER_AGENT,

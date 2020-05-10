@@ -11,7 +11,15 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import environ
 
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False),
+    DB_PORT=(int, 5432)
+)
+environ.Env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,7 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'myn4gqf3qk1y2^o^t=uhu2$ecx&ib5d6!cp%d@yasczlzcv9^)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -79,11 +87,11 @@ WSGI_APPLICATION = 'redditcr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -127,11 +135,11 @@ STATIC_URL = '/static/'
 
 CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq:5672//'
 
-CLENT_ID = os.environ.get('CLENT_ID')
-CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
-PASSWORD = os.environ.get('PASSWORD')
-USER_AGENT = os.environ.get('USER_AGENT')
-USER_NAME = os.environ.get('USERNAME')
+CLIENT_ID = env('CLIENT_ID')
+CLIENT_SECRET = env('CLIENT_SECRET')
+PASSWORD = env('PASSWORD')
+USER_AGENT = env('USER_AGENT')
+USER_NAME = env('USER_NAME')
 
-EXCHANGE_NAME = os.environ.get('exchange')
-ROUTING_KEY = os.environ.get('routing')
+EXCHANGE_NAME = env('EXCHANGE_NAME')
+ROUTING_KEY = env('ROUTING_KEY')

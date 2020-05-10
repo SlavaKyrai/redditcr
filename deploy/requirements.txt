@@ -7,3 +7,4 @@ celery==4.4.2
 django-celery-beat==2.0.0
 praw==7.0.0
 kombu==4.6.8
+django-environ==0.4.5
