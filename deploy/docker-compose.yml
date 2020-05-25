@@ -4,7 +4,7 @@ services:
   db:
     image: postgres
     environment:
-      - POSTGRES_DB=p${DB_NAME}
+      - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
